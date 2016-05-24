@@ -14,7 +14,7 @@
     .field
       = f.label :Cliets
       %br/
-      = f.collection_select :user_id, User.client,:id,:username,{include_blank: "Select Clients"}
+      = f.collection_select :member_id, Member.client,:id,:username,{include_blank: "Select Clients"}
     .field
       = f.label :Cost
       %br/

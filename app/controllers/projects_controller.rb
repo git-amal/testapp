@@ -36,6 +36,15 @@ class ProjectsController < ApplicationController
     	@members = Member.where(role: Member.roles.values-[0,3])
     end
 
+    def update_status
+	  @project = Project.find(params[:id])
+	  status = params[:status]
+	  if @project.update_attributes(project_params)
+	  	redirect_to  projects_path, notice: " Status Updated!"
+	  end
+
+	end
+
     def update
 	  @project = Project.find(params[:id])
 	  if @project.update(project_params)
@@ -55,6 +64,6 @@ class ProjectsController < ApplicationController
     private
 
 	def project_params
-	  params.require(:project).permit(:name, :description, :start_date, :end_date,member_ids: [])
+	  params.require(:project).permit(:name, :description, :start_date, :end_date,:status,member_ids: [])
 	end
 end

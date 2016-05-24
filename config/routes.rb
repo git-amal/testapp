@@ -4,8 +4,16 @@ Rails.application.routes.draw do
   devise_for :members
   resources :members, except: :create
   post 'create_user' => 'members#create', as: :create_member  
-  resources :projects
-  resources :tasks
+  resources :projects do
+    member do
+      patch :update_status
+    end
+  end
+  resources :tasks do
+    member do
+      patch :update_status
+    end
+  end
   resources :invoices
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

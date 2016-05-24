@@ -5,28 +5,28 @@
     = @member.errors.full_messages.first if @member.errors.any?
   %h1 Edit User
 
-= form_for(@member) do |f|
-  .field
-    = f.label :username
-    %br/
-    = f.text_field :username, autofocus: true
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-    %br/
-  .field
-    = f.label :role
-    %br/
-    = f.select :role,  options_for_select(Member.roles.collect{ |key,value| [key,key]})
-    %br/
-    %br/
+  = form_for(@member) do |f|
+    .field
+      = f.label :username
+      %br/
+      = f.text_field :username, autofocus: true
+    .field
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true
+      %br/
+    .field
+      = f.label :role
+      %br/
+      = f.select :role,  options_for_select(Member.roles.collect{ |key,value| [key,key]})
+      %br/
+      %br/
 
-  %p
-    - if @member.new_record?
-      = f.submit "Create Account"
-    - else
-      = f.submit "Update Account"
-    %t/
-    %t/
-    = link_to "Cancel", :back, class: 'button'
+    %p
+      - if @member.new_record?
+        = f.submit "Create Account"
+      - else
+        = f.submit "Update Account"
+      %t/
+      %t/
+      = link_to "Cancel", :back, class: 'button'

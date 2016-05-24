@@ -34,6 +34,15 @@ class TasksController < ApplicationController
 	  end
 	end
 
+	def update_status
+	  @task = Task.find(params[:id])
+	  status = params[:status]
+	  if @task.update_attributes(task_params)
+	  	redirect_to  root_path, notice: " Status Updated!"
+	  end
+
+	end
+
 	def show
 		@task = Task.find(params[:id])
 		@username = Member.find(@task.member_id).username
@@ -49,7 +58,7 @@ class TasksController < ApplicationController
 	private
 
 	def task_params
-		params.require(:task).permit(:name,:description,:project_id,:member_id)
+		params.require(:task).permit(:name,:description,:project_id,:member_id,:status)
 	end
 
 end

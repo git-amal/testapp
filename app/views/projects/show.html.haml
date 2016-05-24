@@ -1,7 +1,7 @@
 = content_for :project_show do
   = flash[:notice]
   %h1{:align => "center"} Project
-  %table{:align => "center",:border => "2" , :width => "100%"}
+  %table{:class=>"table-striped table-hover table-condensed",:align => "center",:border => "2" , :width => "100%"}
     %tr
       %th{:style => "text-align:center",:width => "10%"} Title
       %th{:style => "text-align:center",:width => "20%"} Description
@@ -18,12 +18,13 @@
   %h4{:align => "center"} 
     = link_to "Add Task", new_task_path(:project_id => @project.id), :method => :get
   - if current_member.project_manager?
-    %h4{:align => "center"} 
-      = link_to "Create Invoice", new_invoice_path(:project_id => @project.id), :method => :get
+    - if @project.approve?
+      %h4{:align => "center"} 
+        = link_to "Create Invoice", new_invoice_path(:project_id => @project.id), :method => :get
   %br
   - unless @tasks.blank?
     %h1{:align => "center"} Tasks Listing
-    %table{:align => "center", :border => "2", :width => "100%"}
+    %table{:class=>"table-striped table-hover table-condensed",:align => "center", :border => "2", :width => "100%"}
       %tr
         %th{:style => "text-align:center"} Title
         %th{:style => "text-align:center"} Description

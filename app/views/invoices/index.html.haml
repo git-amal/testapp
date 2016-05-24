@@ -2,7 +2,7 @@
   = flash[:notice]
   -unless @invoices.blank?
     %h1{:align => "center"} Invoices Listing
-    %table{:align => "center", :border => "2", :width => "100%"}
+    %table{:class=>"table-striped table-hover table-condensed",:align => "center", :border => "2", :width => "100%"}
       %tr
         %th{:style => "text-align:center"} Title
         %th{:style => "text-align:center"} Description

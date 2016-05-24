@@ -34,7 +34,7 @@ class InvoicesController < ApplicationController
     def update
 	  @invoice = Invoice.find(params[:id])
 	  if @invoice.update(invoice_params)
-	  	redirect_to  invoice_path, notice: "Updated Invoice"
+	  	redirect_to  invoice_path, notice: "Updated Invoice!!"
 	  else
 	    render 'edit'
 	  end
@@ -43,12 +43,12 @@ class InvoicesController < ApplicationController
 	def destroy
 		@invoice = Invoice.find(params[:id])
 		@invoice.destroy
-		redirect_to  invoices_path, notice: "Destroyed Invoice"
+		redirect_to  invoices_path, notice: "Destroyed Invoice!!"
 	end
 
     private
 
 	def invoice_params
-	  params.require(:invoice).permit(:name, :description,:cost,:project_id,:created_by)
+	  params.require(:invoice).permit(:name,:member_id, :description,:cost,:project_id,:created_by)
 	end
 end

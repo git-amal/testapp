@@ -3,36 +3,40 @@
     = flash[:notice]
     - if member_signed_in?
       %h3{:align => "center"}
-        Welcome to Project management  - 
-        = current_member.username.capitalize
-
+        Welcome to Project management  -
+        \#{current_member.username.capitalize}
       - if current_member.team_member?
         - unless @tasks.blank?
           %br/
           %h4{:align => "center"}
             Yours task list
-          %br/ 
-          %table{:align => "center", :border => "2", :width => "100%"}
+          %br/
+          %table{:class=>"table-striped table-hover table-condensed",:align => "center", :border => "2", :width => "100%"}
             %tr
-              %th{:style => "text-align:center", :width => "30%"} Task
-              %th{:style => "text-align:center", :width => "40%"} Description
-              %th{:style => "text-align:center", :width => "30%"} Project
+              %th{:style => "text-align:center", :width => "20%"} Task
+              %th{:style => "text-align:center", :width => "30%"} Description
+              %th{:style => "text-align:center", :width => "20%"} Project
+              %th{:colspan => "2",:style => "text-align:center", :width => "30%"} Status
             - @tasks.each do |task|
               %tr
-                %td{:align => "center", :width => "30%"}
+                %td{:align => "center", :width => "20%"}
                   = task.name
-                %td{:align => "center", :width => "40%"}
-                  = task.description
                 %td{:align => "center", :width => "30%"}
-                  = project_name(task)
+                  = task.description
+                %td{:align => "center", :width => "20%"}
+                  = Project.find(task.project_id).name
+                
+                = form_for(task,url: update_status_task_path(:id=>task.id), :method => :patch) do |f|
+                  %td{:align => "center", :width => "15%"}
+                    = f.select :status,  options_for_select(Task.statuses.collect{ |key,value| [key,key]}, :selected =>task.status)
+                  %td{:align => "center", :width => "15%"}
+                    = f.submit "Update Status"
         - else
           %br/
           %h4{:align => "center"} No tasks assigned
       %br/
-      / = link_to "Sign Out", destroy_member_session_path, :method => :delete
     - else
       %h1
         %b welcome to project management
       = link_to "Sign In", new_member_session_path, :method => :get
       = link_to "Sign up", new_member_registration_path, :method => :get
-

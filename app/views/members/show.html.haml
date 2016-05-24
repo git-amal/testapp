@@ -1,7 +1,7 @@
 = content_for :user_show do
   = flash[:notice]
   %h1{:align => "center"} User
-  %table{:align => "center",:border => "2" , :width => "100%"}
+  %table{:class=>"table-striped table-hover table-condensed",:align => "center",:border => "2" , :width => "100%"}
     %tr
       %th{:style => "text-align:center",:width => "10%"} Name
       %th{:style => "text-align:center",:width => "20%"} Email
