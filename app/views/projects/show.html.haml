@@ -1,0 +1,37 @@
+= content_for :project_show do
+  = flash[:notice]
+  %h1{:align => "center"} Project
+  %table{:align => "center",:border => "2" , :width => "100%"}
+    %tr
+      %th{:style => "text-align:center",:width => "10%"} Title
+      %th{:style => "text-align:center",:width => "20%"} Description
+      %th{:style => "text-align:center",:width => "20%"} Start date
+      %th{:style => "text-align:center",:width => "20%"} End date
+      %th{:style => "text-align:center",:width => "30%"} Users list
+    %tr
+      %td{:align => "center"}= @project.name
+      %td{:align => "center"}= @project.description
+      %td{:align => "center"}= @project.start_date
+      %td{:align => "center"}= @project.end_date
+      %td{:align => "center"}= @project.users.map(&:username).join("</br>").html_safe
+  %br
+  %h4{:align => "center"} 
+    = link_to "Add Task", new_task_path(:project_id => @project.id), :method => :get
+  %br
+  - unless @tasks.blank?
+    %h1{:align => "center"} Tasks Listing
+    %table{:align => "center", :border => "2", :width => "100%"}
+      %tr
+        %th{:style => "text-align:center"} Title
+        %th{:style => "text-align:center"} Description
+        %th{:colspan => "2", :style => "text-align:center"} Actions
+      - @tasks.each do |task|
+        %tr
+          %td{:align => "center"}
+            = link_to task.name,task
+          %td{:align => "center"}
+            = task.description
+          %td{:align => "center",:width=> "16%"}
+            = link_to "Edit",edit_task_path(task)
+          %td{:align => "center",:width=> "16%"}
+            = link_to "delete", task_path(task), method: :delete, confirm: "You sure?"

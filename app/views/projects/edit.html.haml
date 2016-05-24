@@ -1,0 +1,36 @@
+= content_for :edit_project do
+  = form_for(@project) do |f|
+    .field
+      = f.label :Name
+      %br/
+      = f.text_field :name, autofocus: true
+    .field
+      = f.label :Description
+      %br/
+      = f.text_area :description, autofocus: true
+    .field.datetimepicker
+      = f.label :Start_Time
+      %br/
+      = f.datetime_select :start_date
+    .field.datetimepicker
+      = f.label :End_Time
+      %br/
+      = f.datetime_select :end_date
+      %br/
+    %br/
+    = f.label :Users
+    %div{:style => "border:2px solid #00BFFF; overflow:scroll; height: 100px; width: 100px"}
+      .field
+        = f.collection_check_boxes(:user_ids,@users,:id,:username,include_hidden: false) do |l|
+          = l.check_box
+          = l.label class:"checkbox_options" do
+            = l.text
+          %br/
+    %p
+      %br/
+      = f.submit "Update Project"
+      = link_to "Cancel", :back, class: 'button'
+:javascript
+  $(document).ready(function(){
+       $('.datetimepicker').datetimepicker();
+    });

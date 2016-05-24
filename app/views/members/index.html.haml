@@ -1,0 +1,22 @@
+= content_for :member_list do
+  = flash[:notice]
+  -unless @members.blank?
+    %h1{:align => "center"} Member Listing
+    %table{:align => "center", :border => "2", :width => "100%"}
+      %tr
+        %th{:style => "text-align:center"} Name
+        %th{:style => "text-align:center"} Email
+        %th{:style => "text-align:center"} Role
+        %th{:colspan => "2", :style => "text-align:center"} Actions
+      - @members.each do |member|
+        %tr
+          %td{:align => "center"}
+            = link_to member.username,member
+          %td{:align => "center"}
+            = member.email
+          %td{:align => "center"}
+            = member.role
+          %td{:align => "center",:width=> "16%"}
+            = link_to "Edit",edit_member_path(member)
+          %td{:align => "center",:width=> "16%"}
+            = link_to "delete", member_path(member), method: :delete, confirm: "You sure?"

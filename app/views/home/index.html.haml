@@ -1,0 +1,38 @@
+= content_for :home do
+  %span{:align => "center"}
+    = flash[:notice]
+    - if member_signed_in?
+      %h3{:align => "center"}
+        Welcome to Project management  - 
+        = current_member.username.capitalize
+
+      - if current_member.team_member?
+        - unless @tasks.blank?
+          %br/
+          %h4{:align => "center"}
+            Yours task list
+          %br/ 
+          %table{:align => "center", :border => "2", :width => "100%"}
+            %tr
+              %th{:style => "text-align:center", :width => "30%"} Task
+              %th{:style => "text-align:center", :width => "40%"} Description
+              %th{:style => "text-align:center", :width => "30%"} Project
+            - @tasks.each do |task|
+              %tr
+                %td{:align => "center", :width => "30%"}
+                  = task.name
+                %td{:align => "center", :width => "40%"}
+                  = task.description
+                %td{:align => "center", :width => "30%"}
+                  = project_name(task)
+        - else
+          %br/
+          %h4{:align => "center"} No tasks assigned
+      %br/
+      / = link_to "Sign Out", destroy_member_session_path, :method => :delete
+    - else
+      %h1
+        %b welcome to project management
+      = link_to "Sign In", new_member_session_path, :method => :get
+      = link_to "Sign up", new_member_registration_path, :method => :get
+

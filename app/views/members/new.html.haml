@@ -1,0 +1,7 @@
+= content_for :adduser do
+  %header#content-header
+  %h4{:align=>"center"}
+    = flash[:notice]
+    = @member.errors.full_messages.first if @member.errors.any?
+  %h1 Create a New User
+  = render 'form'

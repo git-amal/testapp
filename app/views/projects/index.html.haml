@@ -1,0 +1,21 @@
+= content_for :project_list do
+  = flash[:notice]
+  -unless @projects.blank?
+    %h1{:align => "center"} Project Listing
+    %table{:align => "center", :border => "2", :width => "100%"}
+      %tr
+        %th{:style => "text-align:center"} Title
+        %th{:style => "text-align:center"} Description
+        %th{:colspan => "2", :style => "text-align:center"} Actions
+      - @projects.each do |project|
+        %tr
+          %td{:align => "center"}
+            = link_to project.name,project
+          %td{:align => "center"}
+            = project.description
+          %td{:align => "center",:width=> "16%"}
+            = link_to "Edit",edit_project_path(project)
+          %td{:align => "center",:width=> "16%"}
+            = link_to "delete", project_path(project), method: :delete, confirm: "You sure?"
+  - else
+    %h3{:align => "center"} you have not created any projects
