@@ -1,0 +1,19 @@
+= content_for :project_show do
+  = flash[:notice]
+  %h1{:align => "center"} Invoice
+  %table{:align => "center",:border => "2" , :width => "100%"}
+    %tr
+      %th{:style => "text-align:center"} Title
+      %th{:style => "text-align:center"} Description
+      %th{:style => "text-align:center"} Client Name
+      %th{:style => "text-align:center"} Project Name
+      %th{:style => "text-align:center"} Cost
+    %tr
+      %td{:align => "center"}= @invoice.name
+      %td{:align => "center"}= @invoice.description
+      %td{:align => "center"}= @invoice.member.username
+      %td{:align => "center"}= @invoice.project.name
+      %td{:align => "center"}= @invoice.cost
+  %br
+  = link_to "back",invoices_path
+ 

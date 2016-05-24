@@ -13,10 +13,13 @@
       %td{:align => "center"}= @project.description
       %td{:align => "center"}= @project.start_date
       %td{:align => "center"}= @project.end_date
-      %td{:align => "center"}= @project.users.map(&:username).join("</br>").html_safe
+      %td{:align => "center"}= @project.members.map(&:username).join("</br>").html_safe
   %br
   %h4{:align => "center"} 
     = link_to "Add Task", new_task_path(:project_id => @project.id), :method => :get
+  - if current_member.project_manager?
+    %h4{:align => "center"} 
+      = link_to "Create Invoice", new_invoice_path(:project_id => @project.id), :method => :get
   %br
   - unless @tasks.blank?
     %h1{:align => "center"} Tasks Listing
@@ -34,4 +37,4 @@
           %td{:align => "center",:width=> "16%"}
             = link_to "Edit",edit_task_path(task)
           %td{:align => "center",:width=> "16%"}
-            = link_to "delete", task_path(task), method: :delete, confirm: "You sure?"
+            = button_to "delete", task_path(task), method: :delete, confirm: "You sure?"

@@ -8,7 +8,8 @@ class Project < ActiveRecord::Base
 	 validates :description, presence: true
 	 validates :start_date, presence: true
 	 validates :end_date, presence: true
-	 validates :member_ids, presence: true
+	 # validates :member_ids, presence: true
+	 validate :validate_start_date
 	
 	 def validate_start_date
 	  errors.add(:start_date,'Start date should be less than end date!!') if self.start_date > self.end_date 

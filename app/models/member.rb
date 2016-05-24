@@ -14,8 +14,8 @@ class Member < ActiveRecord::Base
   has_many :projectusers, :dependent => :destroy
   validates :username, presence: true
   validates :email, presence: true
-  validates :password, presence: true
-  validates :password_confirmation, presence: true
+  # validates :password, presence: true
+  # validates :password_confirmation, presence: true
   validates :role, presence: true
 
   def set_default_role

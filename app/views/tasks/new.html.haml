@@ -1,0 +1,32 @@
+= content_for :new_task do
+  %h4{:align=>"center"}
+    = flash[:notice]
+    = @task.errors.full_messages.first if @task.errors.any?
+  = form_for(@task) do |f|
+    .field
+      = f.label :Name
+      %br/
+      = f.text_field :name, autofocus: true
+    .field
+      = f.label :Description
+      %br/
+      = f.text_area :description, autofocus: true
+    %br/
+    = f.label :Users
+    %div{:style => "border:2px solid #00BFFF; overflow:scroll; height: 100px; width: 100px"}
+      .field
+        =  f.collection_radio_buttons(:member_id,@members, :id,:username) do |b|
+          =  b.label do
+            = b.radio_button 
+            = b.text
+           
+          %br/
+
+    =  f.hidden_field :project_id, :value => @project_id
+    %br/
+    %p
+      - if @task.new_record?
+        = f.submit "Create task"
+      - else
+        = f.submit "Update task"
+      = link_to "Cancel", :back, class: 'button'

@@ -1,0 +1,29 @@
+= content_for :new_invoice do
+  %h4{:align=>"center"}
+    = flash[:notice]
+    = @invoice.errors.full_messages.first if @invoice.errors.any?
+  = form_for(@invoice) do |f|
+    .field
+      = f.label :Name
+      %br/
+      = f.text_field :name, autofocus: true
+    .field
+      = f.label :Description
+      %br/
+      = f.text_area :description, autofocus: true
+    .field
+      = f.label :Cliets
+      %br/
+      = f.collection_select :member_id, Member.client,:id,:username,{include_blank: "Select Clients"}
+    .field
+      = f.label :Cost
+      %br/
+      = f.number_field :cost, :in => 0..100, :step => 0.01
+    =  f.hidden_field :project_id, :value => @project_id
+    =  f.hidden_field :created_by, :value => current_member.id
+
+    %br/
+    %p
+      - if @invoice.new_record?
+        = f.submit "Create Invoice"
+      = link_to "Cancel", :back, class: 'button'

@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160523121713) do
+ActiveRecord::Schema.define(version: 20160524070131) do
+
+  create_table "invoices", force: :cascade do |t|
+    t.string   "project_id",  limit: 255
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.float    "cost",        limit: 24
+    t.string   "created_by",  limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "member_id",   limit: 255
+  end
 
   create_table "members", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -40,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160523121713) do
     t.datetime "end_date"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
-    t.string   "user_id",     limit: 255
+    t.string   "member_id",   limit: 255
   end
 
   create_table "projectusers", force: :cascade do |t|

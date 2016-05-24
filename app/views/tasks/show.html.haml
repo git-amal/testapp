@@ -1,0 +1,21 @@
+= content_for :task_show do
+  = flash[:notice]
+  %h1{:align => "center"} Task
+  %h3{:align => "center"} 
+    Project:
+    = @project.name
+  %table{:align => "center",:border => "2" , :width => "100%"}
+    %tr
+      %th{:style => "text-align:center",:width => "10%"} Title
+      %th{:style => "text-align:center",:width => "20%"} Description
+      %th{:style => "text-align:center",:width => "30%"} User
+    %tr
+      %td{:align => "center"}= @task.name
+      %td{:align => "center"}= @task.description
+      %td{:align => "center"}= @username
+  %br
+  -if current_member.project_manager?
+    %h4{:align => "center"} 
+  %br
+  = link_to "back",(project_path(@project))
+ 

@@ -16,6 +16,6 @@
           %td{:align => "center",:width=> "16%"}
             = link_to "Edit",edit_project_path(project)
           %td{:align => "center",:width=> "16%"}
-            = link_to "delete", project_path(project), method: :delete, confirm: "You sure?"
+            = button_to "delete", project_path(project), method: :delete, confirm: "You sure?"
   - else
     %h3{:align => "center"} you have not created any projects
