@@ -1,4 +1,7 @@
 = content_for :edit_project do
+  %h4{:align=>"center"}
+    = flash[:notice]
+    = @project.errors.full_messages.first if @project.errors.any?
   = form_for(@project) do |f|
     .field
       = f.label :Name

@@ -37,9 +37,14 @@ class TasksController < ApplicationController
 	def update_status
 	  @task = Task.find(params[:id])
 	  status = params[:status]
+	  @project = Project.find(@task.project_id)
 	  if @task.update_attributes(task_params)
+	  	if @project.tasks.count == @project.tasks.where(:status=>2).count
+		  @project.update_attributes(:status =>1)
+		end
 	  	redirect_to  root_path, notice: " Status Updated!"
 	  end
+	 
 
 	end
 

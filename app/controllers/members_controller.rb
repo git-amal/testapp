@@ -2,9 +2,9 @@ class MembersController < ApplicationController
 		def index
 			if current_member.project_manager?
 				@members =  Member.where(role: Member.roles.values-[0])
-			elsif 
+			elsif current_member.team_lead?
 				@members =  Member.where(role: Member.roles.values-[0,3])
-			else		
+			else current_member.client?		
 				@members = Member.all
 			end
     end

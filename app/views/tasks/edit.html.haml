@@ -14,7 +14,7 @@
     = f.label :Users
     %div{:style => "border:2px solid #00BFFF; overflow:scroll; height: 100px; width: 100px"}
       .field
-        =  f.collection_radio_buttons(:user_id,@users, :id,:username) do |b|
+        =  f.collection_radio_buttons(:member_id,@members, :id,:username) do |b|
           =  b.label do
             = b.radio_button 
             = b.text
