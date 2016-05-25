@@ -7,6 +7,8 @@ class InvoicesController < ApplicationController
 	def index
 		if current_member.project_manager?
 			@invoices = Invoice.where(:created_by=>current_member.id) 
+		elsif current_member.admin?
+			@invoices = Invoice.all
 		else
 			@invoices = Invoice.where(:member_id=>current_member.id) 
 		end
@@ -19,12 +21,13 @@ class InvoicesController < ApplicationController
         if @invoice.save
             redirect_to project_path(@invoice.project_id), notice: "invoice succesfully created!" 
         else
-            redirect_to new_invoice_path(:project_id=>params[:invoice][:project_id])
+        	render :action => "new", :project_id => params[:invoice][:project_id]
         end
     end
 
     def show
     	@invoice = Invoice.find(params[:id])
+    	@total_cost = @invoice.working_hours * @invoice.cost
     end
 
     def edit
@@ -36,7 +39,7 @@ class InvoicesController < ApplicationController
 	  if @invoice.update(invoice_params)
 	  	redirect_to  invoice_path, notice: "Updated Invoice!!"
 	  else
-	    render 'edit'
+	    render :action => "edit", :project_id=>@invoice.project_id
 	  end
 	end
 
@@ -49,6 +52,6 @@ class InvoicesController < ApplicationController
     private
 
 	def invoice_params
-	  params.require(:invoice).permit(:name,:member_id, :description,:cost,:project_id,:created_by)
+	  params.require(:invoice).permit(:name,:member_id, :start_date, :end_date,:working_hours,:description,:cost,:project_id,:created_by)
 	end
 end

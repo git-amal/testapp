@@ -15,12 +15,31 @@
       = f.label :Cliets
       %br/
       = f.collection_select :member_id, Member.client,:id,:username,{include_blank: "Select Clients"}
-    .field
-      = f.label :Cost
+    .field.datetimepicker
+      = f.label :Start_Time
       %br/
-      = f.number_field :cost, :in => 0..100, :step => 0.01
+      = f.datetime_select :start_date
+      %br/
+    .field.datetimepicker
+      = f.label :End_Time
+      %br/
+      = f.datetime_select :end_date
+      %br/
+    .field
+      = f.label :Working_hours
+      %br/
+      = f.number_field :working_hours, :in => 0..100, :step => 1
+      %br/
+    .field
+      = f.label :Cost_of_1_hour
+      %br/
+      = f.number_field :cost, :in => 0..100, :step => 0.5
+      %br/
+    =  f.hidden_field :project_id, :value => @invoice.project_id
+    =  f.hidden_field :created_by, :value => current_member.id
 
     %br/
     %p
       = f.submit "Update Invoice"
       = link_to "Cancel", :back, class: 'button'
+

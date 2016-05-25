@@ -6,7 +6,7 @@
       %tr
         %th{:style => "text-align:center"} Title
         %th{:style => "text-align:center"} Description
-        -if current_member.project_manager?
+        -if current_member.project_manager?||current_member.admin?
           %th{:colspan => "2", :style => "text-align:center"} Actions
       - @invoices.each do |invoice|
         %tr
@@ -14,7 +14,7 @@
             = link_to invoice.name,invoice
           %td{:align => "center"}
             = invoice.description
-          -if current_member.project_manager?
+          -if current_member.project_manager?||current_member.admin?
             %td{:align => "center",:width=> "16%"}
               = link_to "Edit",edit_invoice_path(invoice)
             %td{:align => "center",:width=> "16%"}
