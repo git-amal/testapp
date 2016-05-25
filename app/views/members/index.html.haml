@@ -19,9 +19,9 @@
           %td{:align => "center"}
             = member.role
           %td{:align => "center",:width=> "16%"}
-            = link_to "Edit",edit_member_path(member)
+            = button_to "Edit",edit_member_path(member)
           %td{:align => "center",:width=> "16%"}
-            = link_to "delete", member_path(member), method: :delete, confirm: "You sure?"
+            = button_to "delete", member_path(member), method: :delete, confirm: "You sure?"
           -if current_member.admin?
             = form_for(member,url: update_approve_member_path(:id=>member.id), :method => :patch) do |f|
               %td{:align => "center", :width => "15%"}

@@ -26,11 +26,11 @@
     .field
       = f.label :Working_hours
       %br/
-      = f.number_field :working_hours, :in => 0..100, :step => 1
+      = f.number_field :working_hours, :in => 0..1000, :step => 1
       .field
       = f.label :Cost_of_1_hour
       %br/
-      = f.number_field :cost, :in => 0..100, :step => 0.5
+      = f.number_field :cost, :in => 0..10000, :step => 0.5
       %br/
     =  f.hidden_field :project_id, :value => @project_id
     =  f.hidden_field :created_by, :value => current_member.id

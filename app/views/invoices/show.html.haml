@@ -7,12 +7,18 @@
       %th{:style => "text-align:center"} Description
       %th{:style => "text-align:center"} Client Name
       %th{:style => "text-align:center"} Project Name
+      %th{:style => "text-align:center"} Start Date
+      %th{:style => "text-align:center"} End Date
+      %th{:style => "text-align:center"} Working Hours
       %th{:style => "text-align:center"} Cost
     %tr
       %td{:align => "center"}= @invoice.name
       %td{:align => "center"}= @invoice.description
       %td{:align => "center"}= @invoice.member.username
       %td{:align => "center"}= @invoice.project.name
+      %td{:align => "center"}= @invoice.start_date
+      %td{:align => "center"}= @invoice.end_date
+      %td{:align => "center"}= @invoice.working_hours
       %td{:align => "center"}= @total_cost
   %br
   = link_to "back",invoices_path

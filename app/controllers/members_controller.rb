@@ -50,6 +50,11 @@ class MembersController < ApplicationController
       redirect_to members_path, notice: "User Approved!"
     end
 
+    def destroy
+        @member = Member.find(params[:id])
+        @member.destroy
+        redirect_to  members_path, notice: "User Deleted!!"
+    end
 
     def create
         @member = Member.new(member_params)
