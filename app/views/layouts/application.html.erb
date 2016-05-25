@@ -145,17 +145,19 @@
 
           <!-- Sidebar Menu -->
           <%if member_signed_in?%>
-          	 
+          	<%if current_member.approve?%>
 	            <ul class="sidebar-menu">
 	              <li class="header">HEADER</li>
 	              <!-- Optionally, you can add icons to the links -->
                 <li class = "active"><%=link_to"Edit profile",edit_member_registration_path,:method => :get%></li>
                 <% unless current_member.team_member?%>
   	              <li><%= link_to "List Users", members_path, :method => :get%></li>
-  	              <li><%= link_to "Add User", new_member_path, :method => :get%></li>
+                  <% unless current_member.client?%>
+  	                 <li><%= link_to "Add User", new_member_path, :method => :get%></li>
+                  <%end%>
                   <li><%= link_to "List Projects", projects_path, :method => :get%></li>
                   <%unless current_member.team_lead?%>
-                    <%if current_member.client?%>
+                    <%if current_member.client?||current_member.admin?%>
                       <li><%= link_to "Create Project", new_project_path, :method => :get%></li>
                     <%end%>
                     <li><%= link_to "Invoice", invoices_path, :method => :get%></li>  
@@ -172,6 +174,7 @@
                   <%end%>
                 <%end%>
 	            </ul><!-- /.sidebar-menu -->
+            <%end%>
           <%end%>
         </section>
         <!-- /.sidebar -->

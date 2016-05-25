@@ -18,7 +18,7 @@
     .field
       = f.label :role
       %br/
-      = f.select :role,  options_for_select(Member.roles.collect{ |key,value| [key,key]})
+      = f.select :role,  options_for_select(@members.collect{ |key,value| [key,key]})
       %br/
       %br/
 

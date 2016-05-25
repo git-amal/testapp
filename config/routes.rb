@@ -2,7 +2,11 @@ Rails.application.routes.draw do
 
   root :to =>'home#index'
   devise_for :members
-  resources :members, except: :create
+  resources :members, except: :create do
+    member do
+      patch :update_approve
+    end
+  end
   post 'create_user' => 'members#create', as: :create_member  
   resources :projects do
     member do

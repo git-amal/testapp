@@ -2,12 +2,14 @@ class ProjectsController < ApplicationController
 	
 	def new
 		@project = Project.new
-		@members = Member.where(role: Member.roles.values-[0])	
+		@members = Member.where(role: Member.roles.values-[0,4])	
 	end
 
 	def index
-		unless current_member.project_manager?
+		if current_member.client?
 			@projects = Project.where(:member_id=>current_member.id)
+		elsif current_member.admin?
+			@projects = Project.all
 		else
 			@projects = current_member.projects
 		end
@@ -21,7 +23,7 @@ class ProjectsController < ApplicationController
         	
             redirect_to root_path, notice: "Project succesfully created!" 
         else
-        	@members = Member.where(role: Member.roles.values-[0])
+        	@members = Member.where(role: Member.roles.values-[0,4])
             render :new
         end
     end
@@ -33,7 +35,7 @@ class ProjectsController < ApplicationController
 
     def edit
     	@project = Project.find(params[:id])
-    	@members = Member.where(role: Member.roles.values-[0])
+    	@members = Member.where(role: Member.roles.values-[0,4])
     end
 
     def update_status
@@ -50,7 +52,7 @@ class ProjectsController < ApplicationController
 	  if @project.update(project_params)
 	  	redirect_to  projects_path, notice: "Updated Project"
 	  else
-	  	@members = Member.where(role: Member.roles.values-[0,3])
+	  	@members = Member.where(role: Member.roles.values-[0,3,4])
 	    render 'edit'
 	  end
 	end

@@ -18,7 +18,7 @@
     .field
       = f.label :Cost
       %br/
-      = f.number_field :cost, :in => 0..100, :step => 0.01
+      = f.number_field :cost, :in => 0..100, :step => 0.5
     =  f.hidden_field :project_id, :value => @project_id
     =  f.hidden_field :created_by, :value => current_member.id
 

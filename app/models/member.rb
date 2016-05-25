@@ -5,7 +5,7 @@ class Member < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   
-  enum role: [:client,:team_lead,:team_member,:project_manager]
+  enum role: [:client,:team_lead,:team_member,:project_manager,:admin]
 
   after_initialize :set_default_role
   has_many :projects, through: :projectusers
