@@ -13,67 +13,70 @@
 
 ActiveRecord::Schema.define(version: 20160525085100) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "invoices", force: :cascade do |t|
-    t.string   "project_id",    limit: 255
-    t.string   "name",          limit: 255
-    t.string   "description",   limit: 255
-    t.float    "cost",          limit: 24
-    t.string   "created_by",    limit: 255
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "member_id",     limit: 255
+    t.string   "project_id"
+    t.string   "name"
+    t.string   "description"
+    t.float    "cost"
+    t.string   "created_by"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "member_id"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer  "working_hours", limit: 4,   default: 0
+    t.integer  "working_hours", default: 0
   end
 
   create_table "members", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "",    null: false
-    t.string   "encrypted_password",     limit: 255, default: "",    null: false
-    t.string   "reset_password_token",   limit: 255
+    t.string   "email",                  default: "",    null: false
+    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",     limit: 255
-    t.string   "last_sign_in_ip",        limit: 255
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
-    t.string   "username",               limit: 255
-    t.integer  "role",                   limit: 4,   default: 0
-    t.boolean  "approve",                            default: false
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "username"
+    t.integer  "role",                   default: 0
+    t.boolean  "approve",                default: false
   end
 
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
   add_index "members", ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true, using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
+    t.string   "name"
+    t.string   "description"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "member_id",   limit: 255
-    t.integer  "status",      limit: 4,   default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "member_id"
+    t.integer  "status",      default: 0
   end
 
   create_table "projectusers", force: :cascade do |t|
-    t.string   "project_id", limit: 255
-    t.string   "member_id",  limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "project_id"
+    t.string   "member_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
-    t.string   "member_id",   limit: 255
-    t.string   "project_id",  limit: 255
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.integer  "status",      limit: 4,   default: 0
+    t.string   "name"
+    t.string   "description"
+    t.string   "member_id"
+    t.string   "project_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "status",      default: 0
   end
 
 end
