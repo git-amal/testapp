@@ -82,7 +82,7 @@
                 <!-- Menu Toggle Button -->
                 <a href="file:///home/amal/Desktop/AdminLTE-2.3.0/starter.html#" class="dropdown-toggle" data-toggle="dropdown">
                   <!-- The user image in the navbar-->
-                  <%= button_to( "Sign out", destroy_member_session_path, :method => :delete,:style=>'color:#000000;', :class => "css_class") %>
+                  <%= button_to( "Sign out", destroy_member_session_path, :method => :delete,:style=>'color:#000000;', :class => "css_class") unless !member_signed_in?%>
                   <!-- hidden-xs hides the username on small devices so only the image appears. -->
                   <span class="hidden-xs"></span>
                 </a>
