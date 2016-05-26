@@ -2,7 +2,11 @@ class ProjectsController < ApplicationController
 	
 	def new
 		@project = Project.new
-		@members = Member.project_manager	
+		unless current_member.admin?
+			@members = Member.project_manager
+		else
+			@members = Member.all
+		end	
 	end
 
 	def index
