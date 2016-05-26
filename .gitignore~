@@ -10,7 +10,9 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
-
+/db/*.mysql2
+/config/database.yml
+/config/secrets.yml
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
