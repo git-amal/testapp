@@ -36,6 +36,6 @@
           %td{:align => "center"}
             = task.description
           %td{:align => "center",:width=> "16%"}
-            = button_to "Edit",edit_task_path(task)
+            = link_to "Edit",edit_task_path(task)
           %td{:align => "center",:width=> "16%"}
             = button_to "delete", task_path(task), method: :delete, confirm: "You sure?"

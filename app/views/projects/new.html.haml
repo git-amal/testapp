@@ -22,7 +22,7 @@
       %br/
     %br/
     = f.label :Users
-    %div{:style => "border:2px solid #00BFFF; overflow:scroll; height: 100px; width: 100px"}
+    %div{:style => "border:2px solid #00BFFF; overflow:scroll; height: 70px; width: 100px"}
       .field
         = f.collection_check_boxes(:member_ids,@members,:id,:username,include_hidden: false) do |l|
           = l.check_box

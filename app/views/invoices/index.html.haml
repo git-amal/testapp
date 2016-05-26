@@ -16,7 +16,7 @@
             = invoice.description
           -if current_member.project_manager?||current_member.admin?
             %td{:align => "center",:width=> "16%"}
-              = button_to "Edit",edit_invoice_path(invoice)
+              = link_to "Edit",edit_invoice_path(invoice)
             %td{:align => "center",:width=> "16%"}
               = button_to "delete", invoice_path(invoice), method: :delete, confirm: "You sure?"
   - else

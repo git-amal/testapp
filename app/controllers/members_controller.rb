@@ -4,8 +4,10 @@ class MembersController < ApplicationController
 			@members =  Member.where(role: Member.roles.values-[0,4])
 		elsif current_member.team_lead?
 			@members =  Member.where(role: Member.roles.values-[0,3,4])
-		else current_member.client?		
-			@members = Member.where(role: Member.roles.values-[4])
+		elsif current_member.client?		
+			@members = Member.project_manager
+        else 
+            @members =  Member.where(role: Member.roles.values-[4])
 		end
     end
 
@@ -25,13 +27,11 @@ class MembersController < ApplicationController
 
     def edit
         @member = Member.find(params[:id])
-        @members = Member.where(role: Member.roles.values-[4])
+        @members = Member.roles.keys-["admin"]
         if current_member.project_manager?
-            @members =  Member.where(role: Member.roles.values-[0,4])
+            @members =  Member.roles.keys-["admin","client","project_manager"]
         elsif current_member.team_lead?
-            @members =  Member.where(role: Member.roles.values-[0,3,4])
-        else current_member.client?     
-            @members = Member.where(role: Member.roles.values-[4])
+            @members =  Member.roles.keys-["admin","project_manager","client","team_lead"]
         end
     end
 

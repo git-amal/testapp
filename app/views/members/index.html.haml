@@ -7,8 +7,9 @@
         %th{:style => "text-align:center"} Name
         %th{:style => "text-align:center"} Email
         %th{:style => "text-align:center"} Role
-        %th{:colspan => "2", :style => "text-align:center"} Actions
-        -if current_member.admin?
+        -unless current_member.client?
+          %th{:colspan => "2", :style => "text-align:center"} Actions
+        - if current_member.admin?
           %th{:style => "text-align:center"} Approve
       - @members.each do |member|
         %tr
@@ -18,10 +19,11 @@
             = member.email
           %td{:align => "center"}
             = member.role
-          %td{:align => "center",:width=> "16%"}
-            = button_to "Edit",edit_member_path(member)
-          %td{:align => "center",:width=> "16%"}
-            = button_to "delete", member_path(member), method: :delete, confirm: "You sure?"
+          -unless current_member.client?
+            %td{:align => "center",:width=> "16%"}
+              = link_to "Edit",edit_member_path(member)
+            %td{:align => "center",:width=> "16%"}
+              = button_to "delete", member_path(member), method: :delete, confirm: "You sure?"
           -if current_member.admin?
             = form_for(member,url: update_approve_member_path(:id=>member.id), :method => :patch) do |f|
               %td{:align => "center", :width => "15%"}

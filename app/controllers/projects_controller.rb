@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 	
 	def new
 		@project = Project.new
-		@members = Member.where(role: Member.roles.values-[0,4])	
+		@members = Member.project_manager	
 	end
 
 	def index
