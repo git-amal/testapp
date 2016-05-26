@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
 		unless current_member.admin?
 			@members = Member.project_manager
 		else
-			@members = Member.all
+			@members =Member.where(role: Member.roles.values-[4])
 		end	
 	end
 
