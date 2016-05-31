@@ -22,7 +22,6 @@ class ProjectsController < ApplicationController
 	def create
         @project = current_member.projects.new(project_params)
         @project.member_id = current_member.id
-        # hkhukl
         if @project.save
         	
             redirect_to root_path, notice: "Project succesfully created!" 
